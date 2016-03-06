@@ -42,7 +42,7 @@ gulp.task('content', function() {
     	base: paths.content,
     	js: uglify,
     	css: minifyCSS,
-    	disabledTypes: ['svg', 'img'],
+    	disabledTypes: ['svg', 'img']
         }))
         .pipe(minifyHTML({ empty: true }))
 		.pipe(gulp.dest('dist/'));
