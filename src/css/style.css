@@ -46,7 +46,6 @@ header img {
 
 .header-flex-item {
 	color: #fff;
-	align-items: center;
 	line-height: 20px;
 	text-transform: uppercase;
 	padding: 0.5em;
@@ -63,7 +62,9 @@ header img {
     margin-left: 1em;
     padding: 0.1em;
     color: #fff;
-    min-height: 48px;
+    font-family: 'Bangers', impact;
+    font-size: 14px;
+
 }
 
 .menu-btn {
@@ -112,7 +113,7 @@ header img {
 @media only screen and (max-width: 750px) {
 
 header p {
-	font-size: 10px;
+	font-size: 18px;
 	}
 
 .name {
