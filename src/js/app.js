@@ -45,6 +45,7 @@ var viewModel = function(){
 		self.locationList.push(new markers(cycleLocation));
 	});
 
+
 	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();
 
@@ -54,13 +55,21 @@ var viewModel = function(){
     //iterate over observable array
    	this.locationList().forEach(function(cycleLocation){
    		pin = new google.maps.Marker({
-		position: new google.maps.LatLng(cycleLocation.lat(), cycleLocation.lng()),
-		map: map,
-		title: cycleLocation.name(),
-		animation: google.maps.Animation.DROP
+			position: new google.maps.LatLng(cycleLocation.lat(), cycleLocation.lng()),
+			map: map,
+			title: cycleLocation.name(),
+			animation: google.maps.Animation.DROP
 		});
 
 		cycleLocation.marker = pin;
+
+		cycleLocation.marker.addListener('click', function() {
+			infoWindow.setContent('<div id="content">' + '<h1>' + 
+				cycleLocation.name() + '</h1>' + '<div id="body-content">'
+				+ '<p></b>See ride on Strava</b></p>' + '</div>' +
+				'</div>');
+			infoWindow.open(map, cycleLocation.marker);
+		});
    	});
 
 
