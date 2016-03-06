@@ -61,8 +61,10 @@ var viewModel = function(){
 			animation: google.maps.Animation.DROP
 		});
 
+   		// Set variable outside function to equal each marker
 		cycleLocation.marker = pin;
 
+		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
 			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
 				cycleLocation.name() + '</h1>' + '<div class="body-content">'
@@ -70,8 +72,22 @@ var viewModel = function(){
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
 		});
+
+		// Zoom in and set clicked marker to centre
+		cycleLocation.marker.addListener('click', function() {
+			map.setZoom(10);
+			map.setCenter(cycleLocation.marker.getPosition());
+		});
    	});
 
+   	//Display the ride for the given map marker on click
+    this.displayRide = function(cycleLocation){
+        google.maps.event.trigger(cycleLocation.marker, 'click', {
+        });
+        var close = document.getElementById("drawer");
+        close.classList.remove("open")
+
+    };
 
 };
 
