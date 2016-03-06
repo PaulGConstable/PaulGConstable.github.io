@@ -14,24 +14,35 @@
 
 <body>
 	<header>
-		<div class='header-flex-image'>
+		<div class='header-flex-item'>
 			<a href="/"><picture>
 			<source media="(max-width: 480px)" srcset="img/profilepic.jpg">
 			<img src="img/profilepic.jpg" alt="profile picture of Paul Constable">
 			</picture></a>
 		</div>
-		<div class='header-flex-item'><p>Paul Constable</p></div>
+		<div class='header-flex-item name'><p>Paul Constable</p></div>
 		<div class='header-flex-item'>
 			<form><p>Search: <input type= 'text' class='header-search'></p></form>
 		</div>
 	</header>
 
 	<content>
+		<nav>
+			<ul class="rides-container" data-bind="foreach: locationList">
+				<li data-bind="text: name, click: $parent.displayInfo"></li>
+			</ul>
+		</nav>
 		<div id='map'></div>
 	</content>
 
-	<footer>
-	</footer>
+	<section>
+		<div class='menu-btn'>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+			</svg>
+		</div>
+	</section>
+	
 	<script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs">
 	</script>
