@@ -14,39 +14,40 @@
 
 <body>
 	<header>
+		<div class='header-flex-item name'><p>Paul Constable</p></div>
+		<div class='header-flex-item'>
+			<form><p>Search: <input type= 'text' class='header-search'></p></form>
+		</div>
 		<div class='header-flex-item'>
 			<a href="/"><picture>
 			<source media="(max-width: 480px)" srcset="img/profilepic.jpg">
 			<img src="img/profilepic.jpg" alt="profile picture of Paul Constable">
 			</picture></a>
 		</div>
-		<div class='header-flex-item name'><p>Paul Constable</p></div>
-		<div class='header-flex-item'>
-			<form><p>Search: <input type= 'text' class='header-search'></p></form>
-		</div>
 	</header>
 
+	<section>
+		<a id="menu" class='menu-btn'>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+			</svg>
+		</a>
+	</section>
+
 	<content>
-		<nav>
-			<ul class="rides-container" data-bind="foreach: locationList">
-				<li data-bind="text: name, click: $parent.displayInfo"></li>
+		<nav id="drawer" class="rides-container">
+			<ul  data-bind="foreach: locationList">
+				<li data-bind="text: name, click: $parent.displayInfo" class="nav-item"></li>
 			</ul>
 		</nav>
 		<div id='map'></div>
 	</content>
 
-	<section>
-		<div class='menu-btn'>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
-			</svg>
-		</div>
-	</section>
-	
 	<script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs">
 	</script>
 	<script src="js/libs/knockout-3.4.0.js"></script>
+	<script src="js/libs/jquery-1.12.1.min.js" async></script>
 	<script src="js/app.js"></script>
 </body>
 

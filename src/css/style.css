@@ -19,8 +19,8 @@ header {
     display: flex;
     flex-direction: row;
  	flex-wrap: wrap;
-    justify-content: flex-start;
-	min-height: 12%;
+    justify-content: flex-end;
+	min-height: 14%;
 	width: 100%;
 	/* Adds shadow to the bottom of the bar */
 	-webkit-box-shadow: 0 0 4em  #222;
@@ -72,30 +72,42 @@ header img {
 
 .rides-container {
 	border: 2px solid #fff;
- 	list-style-type: none;
-	text-align: center;
 	background-color: #2c3e50;
-    width: 25vh;
+    min-width: 17%;
     height: auto;
     padding: 1em;
-    margin-right: 1em;
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    position: relative;
-    float: right;
-    z-index: 99;
+    position: absolute;
+    z-index: 1;
+    top: 15%;
+    left: 1%;
 }
+
+ .nav-item {
+    width: 100%;
+    padding: 1em;
+    list-style-type: none;
+	text-align: left;
+  }
 
 #map {
 	min-height: 100%;
 	min-width: 100%;
 	background-color: #ccc;
 	position: absolute;
+	left: 0;
+	top: 14%;
 }
 
+.gm-style-iw {
+	color: #000;
+}
 
-
+.gm-style-mtc {
+  display: none;
+}
 
 @media only screen and (max-width: 750px) {
 
@@ -108,13 +120,14 @@ header p {
 }
 
 .menu-btn {
+	display: inline-block;
 	visibility: visible;
-	position: relative;
-	z-index: 99;
+	position: absolute;
+	z-index: 1;
 	/* Here I can animate the drawer*/
 	transition: transform 0.3s ease;
-	padding: 0.5em;
-	float: right;
+	top: 15%;
+	left: 3%;
 }
 
 .menu-btn svg {
@@ -126,11 +139,22 @@ header p {
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border: 2px solid #fff;
-
 }
 
 .rides-container {
-	display: none;
+	z-index: 1;
+	position: absolute;
+	margin-top: 5em;
+	transform: translate(-118%,0);
+    /* Here I can animate the drawer*/
+    transition: transform 0.3s ease;
+    top:15%;
+
 }
+
+.rides-container.open {
+	margin-top: 5em;
+    transform: translate(3%, 0);
+  }
 
 }

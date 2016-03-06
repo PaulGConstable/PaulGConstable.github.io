@@ -64,8 +64,8 @@ var viewModel = function(){
 		cycleLocation.marker = pin;
 
 		cycleLocation.marker.addListener('click', function() {
-			infoWindow.setContent('<div id="content">' + '<h1>' + 
-				cycleLocation.name() + '</h1>' + '<div id="body-content">'
+			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
+				cycleLocation.name() + '</h1>' + '<div class="body-content">'
 				+ '<p></b>See ride on Strava</b></p>' + '</div>' +
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
@@ -80,5 +80,18 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	center: new google.maps.LatLng(51.450210, 2.180518),
 	zoom: 6
 });
+
+// Mobile responsive navigation using JQuery to open drawer
+    var menu = document.querySelector('#menu');
+    var main = document.querySelector('section');
+    var drawer = document.querySelector('.rides-container');
+
+    menu.addEventListener('click', function(e) {
+      drawer.classList.toggle('open');
+      e.stopPropagation();
+    });
+    main.addEventListener('click', function() {
+      drawer.classList.remove('open');
+    });
 
 ko.applyBindings(new viewModel());
