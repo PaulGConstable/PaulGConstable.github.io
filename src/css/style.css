@@ -20,7 +20,7 @@ header {
     flex-direction: row;
  	flex-wrap: wrap;
     justify-content: flex-end;
-	min-height: 14%;
+	min-height: 8%;
 	width: 100%;
 	/* Adds shadow to the bottom of the bar */
 	-webkit-box-shadow: 0 0 4em  #222;
@@ -83,8 +83,8 @@ header img {
     -webkit-border-radius: 8px;
     position: absolute;
     z-index: 1;
-    top: 15%;
-    left: 1%;
+    top: 10%;
+    left: 2%;
 }
 
 .nav-item {
@@ -100,7 +100,7 @@ header img {
 	background-color: #ccc;
 	position: absolute;
 	left: 0;
-	top: 14%;
+	top: 8%;
 }
 
 .gm-style-iw {
@@ -129,7 +129,7 @@ header p {
 	z-index: 1;
 	/* Here I can animate the drawer*/
 	transition: transform 0.3s ease;
-	top: 17%;
+	top: 15%;
 	left: 3%;
 }
 
