@@ -20,7 +20,8 @@ header {
     flex-direction: row;
  	flex-wrap: wrap;
     justify-content: flex-end;
-	min-height: 14%;
+    min-height: 100px;
+	max-height: 14%;
 	width: 100%;
 	/* Adds shadow to the bottom of the bar */
 	-webkit-box-shadow: 0 0 4em  #222;
