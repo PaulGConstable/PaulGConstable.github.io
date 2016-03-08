@@ -32,21 +32,21 @@ var markers = function(data){
     this.lat = ko.observable(data.lat);
     this.lng = ko.observable(data.lng);
     this.marker = ko.observable();
-    this.ride = ko.observable();
 };
 
 var viewModel = function(){
 	var self = this;
 
-	 // Gets data from markers function and stores in
-	 // KO observable array above
 	this.locationList = ko.observableArray([]);
+
+	 // Gets data from markers function and puts in
+	 // KO observable array above
 	favLocations.forEach(function(cycleLocation){
 		self.locationList.push(new markers(cycleLocation));
 	});
 
 
-	//Declare info window to use later
+	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();
 
     // Variable for marker data
@@ -66,8 +66,8 @@ var viewModel = function(){
 
 		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
-			infoWindow.setContent('<div class="info-content">' + '<h3>' + 
-				cycleLocation.name() + '</h3>' + '<div class="body-content">'
+			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
+				cycleLocation.name() + '</h1>' + '<div class="body-content">'
 				+ '<p></b>See ride on Strava</b></p>' + '</div>' +
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
@@ -78,10 +78,18 @@ var viewModel = function(){
 			map.setZoom(10);
 			map.setCenter(cycleLocation.marker.getPosition());
 		});
-
    	});
-};
 
+   	//Display the ride for the given map marker on click
+    this.displayRide = function(cycleLocation){
+        google.maps.event.trigger(cycleLocation.marker, 'click', {
+        });
+        var close = document.getElementById("drawer");
+        close.classList.remove("open")
+
+    };
+
+};
 
 // Initialize the Map
 var map = new google.maps.Map(document.getElementById('map'), {
