@@ -34,17 +34,24 @@ var markers = function(data){
     this.marker = ko.observable();
 };
 
-var viewModel = function(){
+var viewModel = function(data){
 	var self = this;
 
 	this.locationList = ko.observableArray([]);
+	this.cycleSearch = ko.observable('');
+
+	self.cycleFiltered = ko.pureComputed(function(cycleLocation){
+		var search = self.cycleSearch().toLowerCase();
+		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
+			return cycleLocation.name == search;
+		});
+	});
 
 	 // Gets data from markers function and puts in
 	 // KO observable array above
 	favLocations.forEach(function(cycleLocation){
 		self.locationList.push(new markers(cycleLocation));
 	});
-
 
 	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();

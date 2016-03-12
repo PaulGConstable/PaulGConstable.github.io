@@ -14,11 +14,11 @@
 
 <body>
 	<header>
-		<div class='header-flex-item name'><p>Paul Constable</p></div>
-		<div class='header-flex-item'>
-			<form><p>Search: <input placeholder ="Find my ride..." id="search" type="search" name="search" autocomplete="off" /></p></form>
+		<div class="header-flex-item name"><p>Paul Constable</p></div>
+		<div class="header-flex-item">
+			<form><p>Search: <input id="search" placeholder="Find my ride..." data-bind="textInput: cycleFiltered"></p></form>
 		</div>
-		<div class='header-flex-item'>
+		<div class="header-flex-item">
 			<a href="/"><picture>
 			<source media="(max-width: 480px)" srcset="img/profilepic.jpg">
 			<img src="img/profilepic.jpg" alt="profile picture of Paul Constable">
@@ -36,7 +36,7 @@
 
 	<content>
 		<nav id="drawer" class="rides-container">
-			<ul  data-bind="foreach: locationList">
+			<ul data-bind="foreach: locationList">
 				<li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
 			</ul>
 		</nav>
