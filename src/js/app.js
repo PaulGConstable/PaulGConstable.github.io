@@ -41,9 +41,11 @@ var viewModel = function(data){
 	this.cycleSearch = ko.observable('');
 
 	self.cycleFiltered = ko.pureComputed(function(cycleLocation){
+		// Represents a filtered list of Location List names
+		// i.e., only those matching the "cycleSearch"
 		var search = self.cycleSearch().toLowerCase();
 		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
-			return cycleLocation.name == search;
+			return cycleLocation.name() == search;
 		});
 	});
 
@@ -95,7 +97,6 @@ var viewModel = function(data){
         close.classList.remove("open")
 
     };
-
 };
 
 // Initialize the Map
