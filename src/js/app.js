@@ -40,9 +40,9 @@ var viewModel = function(data){
 	this.locationList = ko.observableArray([]);
 	this.cycleSearch = ko.observable('');
 
-	self.cycleFiltered = ko.pureComputed(function(cycleLocation){
+	self.cycleFiltered = ko.pureComputed(function(){
 		// Represents a filtered list of Location List names
-		// i.e., only those matching the "cycleSearch"
+		// i.e., only those matching the "cycleSearch" condition
 		var search = self.cycleSearch().toLowerCase();
 		if (!search) {
 			return null;
@@ -84,10 +84,7 @@ var viewModel = function(data){
 				+ '<p></b>See ride on Strava</b></p>' + '</div>' +
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
-		});
-
-		// Zoom in and set clicked marker to centre
-		cycleLocation.marker.addListener('click', function() {
+			// Zoom in and set clicked marker to centre
 			map.setZoom(10);
 			map.setCenter(cycleLocation.marker.getPosition());
 		});
