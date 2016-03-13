@@ -44,9 +44,13 @@ var viewModel = function(data){
 		// Represents a filtered list of Location List names
 		// i.e., only those matching the "cycleSearch"
 		var search = self.cycleSearch().toLowerCase();
+		if (!search) {
+			return null;
+		} else {
 		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
-			return cycleLocation.name() == search;
+			return ko.utils.stringStartsWith(cycleLocation.name().toLowerCase(), search);
 		});
+	}
 	});
 
 	 // Gets data from markers function and puts in
