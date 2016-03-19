@@ -78,10 +78,16 @@ var viewModel = function(data){
 
 		// Get Strava API
 		var stravaURL = 'https://www.strava.com/api/v3/athlete/activities?per_page=1&access_token=01d55b235d8b40e4733bc5b843c2d61c5e13911a'
-		$.getJSON(stravaURL, function(data){
-			console.log(data);
-		}).error(function(e){
-        	console.log('Strava data Could Not Be Loaded');
+		$.ajax({
+		    url: stravaURL,
+		    dataType: "jsonp",
+		    jsonp: "callback",
+		    success: function ( response ) {
+		    	console.log(response);
+		    },
+		    error: function (){
+		    	console.log('Strava data Could Not Be Loaded');
+		    }
     	});
 
    		// Set variable outside function to equal each marker
