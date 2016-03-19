@@ -76,6 +76,14 @@ var viewModel = function(data){
 			animation: google.maps.Animation.DROP
 		});
 
+		// Get Strava API
+		var stravaURL = 'https://www.strava.com/api/v3/athlete/activities?per_page=1&access_token=01d55b235d8b40e4733bc5b843c2d61c5e13911a'
+		$.getJSON(stravaURL, function(data){
+			console.log(data);
+		}).error(function(e){
+        	console.log('Strava data Could Not Be Loaded');
+    	});
+
    		// Set variable outside function to equal each marker
 		cycleLocation.marker = pin;
 
@@ -102,10 +110,9 @@ var viewModel = function(data){
     };
 
     // Mobile Responsive navigiation to open drawer
-
     this.mobileNavToggle = function () {
-
-    }
+    	// Do Navigation in Knockout
+    };
 };
 
 // Initialize the Map
