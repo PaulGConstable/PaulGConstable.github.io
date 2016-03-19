@@ -48,7 +48,7 @@ var viewModel = function(data){
 			return self.locationList();
 		} else {
 		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
-			return cycleLocation.name().toLowerCase().indexOf(query) > -1;
+			return cycleLocation.name().toLowerCase().indexOf(search) > -1;
 		});
 	}
 	});
