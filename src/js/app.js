@@ -101,7 +101,7 @@ var viewModel = function(data){
 
     // Mobile Responsive navigiation to open drawer
 
-    self.mobileNavToggle = function () {
+    this.mobileNavToggle = function () {
 
     }
 };
