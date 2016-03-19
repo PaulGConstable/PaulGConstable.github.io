@@ -16,7 +16,7 @@
 	<header>
 		<div class="header-flex-item name"><p>Paul Constable</p></div>
 		<div class="header-flex-item">
-			<form><p>Search: <input id="search" placeholder="Find my ride..." data-bind="textInput: cycleFiltered"></p></form>
+			<form><p>Search: <input id="search" placeholder="Find my ride..." data-bind="textInput: cycleSearch"></p></form>
 		</div>
 		<div class="header-flex-item">
 			<a href="/"><picture>
@@ -35,7 +35,7 @@
 	</section>
 
 	<content>
-		<nav id="drawer" class="rides-container">
+		<nav id="drawer" class="rides-container" data-bind="click: mobileNavToggle">
 			<ul data-bind="foreach: locationList">
 				<li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
 			</ul>

@@ -45,7 +45,7 @@ var viewModel = function(data){
 		// i.e., only those matching the "cycleSearch" condition
 		var search = self.cycleSearch().toLowerCase();
 		if (!search) {
-			return null;
+			return self.locationList();
 		} else {
 		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
 			return ko.utils.stringStartsWith(cycleLocation.name().toLowerCase(), search);
@@ -98,6 +98,12 @@ var viewModel = function(data){
         close.classList.remove("open")
 
     };
+
+    // Mobile Responsive navigiation to open drawer
+
+    self.mobileNavToggle = function () {
+
+    }
 };
 
 // Initialize the Map
