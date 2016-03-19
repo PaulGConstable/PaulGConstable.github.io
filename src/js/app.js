@@ -44,9 +44,11 @@ var viewModel = function(data){
 		// Represents a filtered list of Location List names
 		// i.e., only those matching the "cycleSearch" condition
 		var search = self.cycleSearch().toLowerCase();
+		var add = document.getElementById("drawer");
 		if (!search) {
 			return self.locationList();
 		} else {
+		add.classList.add("open");
 		return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
 			return cycleLocation.name().toLowerCase().indexOf(search) > -1;
 		});
@@ -95,7 +97,7 @@ var viewModel = function(data){
         google.maps.event.trigger(cycleLocation.marker, 'click', {
         });
         var close = document.getElementById("drawer");
-        close.classList.remove("open")
+        close.classList.remove("open");
 
     };
 
