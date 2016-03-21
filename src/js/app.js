@@ -1,9 +1,10 @@
 var favLocations = [
 	{
-		name: "Home, Crayford",
-		lat: 51.450210,
-		lng: 0.180518,
+		name: "Hadlow College, Tonbridge",
+		lat: 51.223217,
+		lng: 0.331976,
 	},
+
 	{
 		name: "Channel 4, London",
 		lat: 51.496026,
@@ -76,8 +77,8 @@ var viewModel = function(data){
 			animation: google.maps.Animation.DROP
 		});
 
-		// Get Strava API
-		var stravaURL = 'https://www.strava.com/api/v3/athlete/activities?per_page=1&access_token=01d55b235d8b40e4733bc5b843c2d61c5e13911a'
+		// Get Strava API Data
+		var stravaURL = 'https://www.strava.com/api/v3/activities/168304053?per_page=200&access_token=01d55b235d8b40e4733bc5b843c2d61c5e13911a'
 		$.ajax({
 		    url: stravaURL,
 		    dataType: "jsonp",
@@ -86,9 +87,16 @@ var viewModel = function(data){
 		    	console.log(response);
 		    },
 		    error: function (){
-		    	console.log('Strava data Could Not Be Loaded');
+		    	console.log('Strava data could not be loaded');
 		    }
     	});
+
+		// Strava ID numbers
+    	// Amsterdam - 168304053
+    	// Hadlow - 127445893
+    	// Dieppe - 151990703
+    	// Stratford - 359827471
+    	// Channel 4 - 150243926
 
    		// Set variable outside function to equal each marker
 		cycleLocation.marker = pin;
