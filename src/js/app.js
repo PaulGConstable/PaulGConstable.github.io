@@ -91,7 +91,10 @@ var viewModel = function(data){
 		    dataType: "jsonp",
 		    jsonp: "callback",
 		    success: function ( response ) {
-		    	console.log(response);
+		    	var routeMap = response["map"];
+		    	cycleLocation.distance = response["distance"];
+		    	cycleLocation.url = "http://www.strava.com/activities/" + response["id"];
+		    	console.log(routeMap);
 		    },
 		    error: function (){
 		    	console.log('Strava data could not be loaded');
@@ -104,8 +107,8 @@ var viewModel = function(data){
 		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
 			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
-				cycleLocation.name() + '</h1>' + '<div class="body-content">'
-				+ '<p></b>See ride on Strava</b></p>' + '</div>' +
+				cycleLocation.name() + '</h1>' + '<p>Cycle Distance: ' + cycleLocation.distance + '</p>' + '<div class="body-content">'
+				+ '<p></b><a href="' + cycleLocation.url + '">See ride on Strava</a></b></p>' + '</div>' +
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
 			// Zoom in and set clicked marker to centre
