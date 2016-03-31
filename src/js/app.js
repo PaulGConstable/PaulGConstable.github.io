@@ -92,7 +92,7 @@ var viewModel = function(data){
 		    dataType: "jsonp",
 		    jsonp: "callback",
 		    success: function ( response ) {
-		    	cycleLocation.routeMap = response["map"];
+		    	cycleLocation.routeMap = response.map["polyline"];
 		    	// Convert Strava Distance to Miles for infoWindow
 		    	cycleLocation.distance = response["distance"]*0.000621371192;
 		    	// Get Strava ID to for URL in infoWindow
