@@ -92,12 +92,17 @@ var viewModel = function(data){
 		    dataType: "jsonp",
 		    jsonp: "callback",
 		    success: function ( response ) {
-		    	// Get encoded polyline data to display route on map
+		    	// Get encoded polyline data to and add to array
 		    	cycleLocation.routeMap = response.map["polyline"];
-		    	// Convert Strava Distance to Miles for infoWindow
+		    	// Get Strava Distance and convert to miles for array
 		    	cycleLocation.distance = response["distance"]*0.000621371192;
+		    	// Get Strava Moving time and convert to hours and minutes
+		    	cycleLocation.time = response["moving_time"]/3600;
+		    	// Get Strava average speed and add to array;
+		    	cycleLocation.speed = response["average_speed"]* 2.23693629;
 		    	// Get Strava ID to for URL in infoWindow
 		    	cycleLocation.url = "http://www.strava.com/activities/" + response["id"];
+
 		    },
 		    error: function (){
 		    	console.log('Strava data could not be loaded');
@@ -110,9 +115,12 @@ var viewModel = function(data){
 		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
 			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
-				cycleLocation.name() + '</h1>' + '<p>Cycle Distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' + '<div class="body-content">'
-				+ '<p></b><a href="' + cycleLocation.url + '">See ride on Strava</a></b></p>' + '</div>' +
-				'</div>');
+				cycleLocation.name() + '</h1>' + 
+				'<div class="body-content"><p>Cycle distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' + 
+				'<p>Average speed: ' + cycleLocation.speed.toFixed(2) + 'mph</p>' + 
+				'<p>Rough Moving Time: ' + cycleLocation.time.toFixed(0) + ' hours</p>' + 
+				'<p></b><a href="' + cycleLocation.url + '">See ride on Strava</a></b></p>' + 
+				'</div></div>');
 			infoWindow.open(map, cycleLocation.marker);
 			// Zoom in and set clicked marker to centre
 			map.setZoom(8);
