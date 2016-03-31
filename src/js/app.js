@@ -72,7 +72,8 @@ var viewModel = function(data){
     var infoWindow = new google.maps.InfoWindow();
 
     // Variable for marker data
-    var pin;
+    var pin, route;
+
 
     //iterate over observable array
    	this.locationList().forEach(function(cycleLocation){
@@ -80,7 +81,7 @@ var viewModel = function(data){
 			position: new google.maps.LatLng(cycleLocation.lat(), cycleLocation.lng()),
 			map: map,
 			title: cycleLocation.name(),
-			animation: google.maps.Animation.DROP
+			animation: google.maps.Animation.DROP,
 		});
 
 		// Get Strava API Data
@@ -91,10 +92,12 @@ var viewModel = function(data){
 		    dataType: "jsonp",
 		    jsonp: "callback",
 		    success: function ( response ) {
-		    	var routeMap = response["map"];
-		    	cycleLocation.distance = response["distance"];
+		    	cycleLocation.routeMap = response["map"];
+		    	// Convert Strava Distance to Miles for infoWindow
+		    	cycleLocation.distance = response["distance"]*0.000621371192;
+		    	// Get Strava ID to for URL in infoWindow
 		    	cycleLocation.url = "http://www.strava.com/activities/" + response["id"];
-		    	console.log(routeMap);
+		    	console.log(cycleLocation.routeMap);
 		    },
 		    error: function (){
 		    	console.log('Strava data could not be loaded');
@@ -107,7 +110,7 @@ var viewModel = function(data){
 		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
 			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
-				cycleLocation.name() + '</h1>' + '<p>Cycle Distance: ' + cycleLocation.distance + '</p>' + '<div class="body-content">'
+				cycleLocation.name() + '</h1>' + '<p>Cycle Distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' + '<div class="body-content">'
 				+ '<p></b><a href="' + cycleLocation.url + '">See ride on Strava</a></b></p>' + '</div>' +
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
@@ -115,6 +118,7 @@ var viewModel = function(data){
 			map.setZoom(10);
 			map.setCenter(cycleLocation.marker.getPosition());
 		});
+
    	});
 
    	//Display the ride for the given map marker on click
@@ -123,7 +127,6 @@ var viewModel = function(data){
         });
         var close = document.getElementById("drawer");
         close.classList.remove("open");
-
     };
 
     // Mobile Responsive navigiation to open drawer
