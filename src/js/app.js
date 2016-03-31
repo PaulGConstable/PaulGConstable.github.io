@@ -92,12 +92,12 @@ var viewModel = function(data){
 		    dataType: "jsonp",
 		    jsonp: "callback",
 		    success: function ( response ) {
+		    	// Get encoded polyline data to display route on map
 		    	cycleLocation.routeMap = response.map["polyline"];
 		    	// Convert Strava Distance to Miles for infoWindow
 		    	cycleLocation.distance = response["distance"]*0.000621371192;
 		    	// Get Strava ID to for URL in infoWindow
 		    	cycleLocation.url = "http://www.strava.com/activities/" + response["id"];
-		    	console.log(cycleLocation.routeMap);
 		    },
 		    error: function (){
 		    	console.log('Strava data could not be loaded');
@@ -115,8 +115,20 @@ var viewModel = function(data){
 				'</div>');
 			infoWindow.open(map, cycleLocation.marker);
 			// Zoom in and set clicked marker to centre
-			map.setZoom(10);
+			map.setZoom(8);
 			map.setCenter(cycleLocation.marker.getPosition());
+
+			// Decode Strava Route and show it on click of marker
+			var decodedRoute = google.maps.geometry.encoding.decodePath(cycleLocation.routeMap);
+
+			// Show decoded Strava route on each marker click
+			route = new google.maps.Polyline({
+				path: decodedRoute,
+				strokeColor: "#FF0000",
+				strokeOpacity: 1.0,
+				strokeWeight: 5,
+				map: map
+			});
 		});
 
    	});
@@ -125,6 +137,7 @@ var viewModel = function(data){
     this.displayRide = function(cycleLocation){
         google.maps.event.trigger(cycleLocation.marker, 'click', {
         });
+
         var close = document.getElementById("drawer");
         close.classList.remove("open");
     };
