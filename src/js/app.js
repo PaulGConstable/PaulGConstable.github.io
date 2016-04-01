@@ -41,6 +41,9 @@ var markers = function(data){
     this.marker = ko.observable();
 };
 
+    // Variable for marker data
+    var pin, route;
+
 var viewModel = function(data){
 	var self = this;
 
@@ -70,9 +73,6 @@ var viewModel = function(data){
 
 	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();
-
-    // Variable for marker data
-    var pin, route;
 
 
     //iterate over observable array
@@ -122,6 +122,12 @@ var viewModel = function(data){
 				'<p></b><a href="' + cycleLocation.url + '">See ride on Strava</a></b></p>' + 
 				'</div></div>');
 			infoWindow.open(map, cycleLocation.marker);
+
+			// Remove the current polyline from the Map when you close an infoWindow
+			google.maps.event.addListener(infoWindow,'closeclick',function(){
+   				route.setMap(null); //removes polyline
+			});
+
 			// Zoom in and set clicked marker to centre
 			map.setZoom(8);
 			map.setCenter(cycleLocation.marker.getPosition());
@@ -137,17 +143,21 @@ var viewModel = function(data){
 				strokeWeight: 5,
 				map: map
 			});
+
 		});
 
    	});
 
    	//Display the ride for the given map marker on click
     this.displayRide = function(cycleLocation){
-        google.maps.event.trigger(cycleLocation.marker, 'click', {
-        });
-
-        var close = document.getElementById("drawer");
+    	var activeRoute = false;
+    	var routeName = document.getElementById("routeName")
+    	var close = document.getElementById("drawer");
         close.classList.remove("open");
+
+        google.maps.event.trigger(cycleLocation.marker, 'click', {
+  		
+        });
     };
 
     // Mobile Responsive navigiation to open drawer
@@ -162,17 +172,18 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 6
 });
 
-// Mobile responsive navigation using JQuery to open drawer
+// Mobile responsive navigation
     var menu = document.querySelector('#menu');
     var main = document.querySelector('section');
     var drawer = document.querySelector('.rides-container');
 
     menu.addEventListener('click', function(e) {
-      drawer.classList.toggle('open');
-      e.stopPropagation();
+		drawer.classList.toggle('open');
+		e.stopPropagation();
+		route.setMap(null);
     });
     main.addEventListener('click', function() {
-      drawer.classList.remove('open');
+		drawer.classList.remove('open');
     });
 
 ko.applyBindings(new viewModel());

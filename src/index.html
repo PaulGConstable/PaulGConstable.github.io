@@ -37,7 +37,7 @@
 	<content>
 		<nav id="drawer" class="rides-container" data-bind="click: mobileNavToggle">
 			<ul data-bind="foreach: cycleFiltered">
-				<li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
+				<li data-bind="text: name, click: $parent.displayRide" class="nav-item" id="routeName"></li>
 			</ul>
 		</nav>
 		<div id='map'></div>
