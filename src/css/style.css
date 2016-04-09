@@ -69,6 +69,7 @@ ul {
     color: #fff;
     font-family: 'Bangers', impact;
     font-size: 14px;
+    min-height: 48px;
 
 }
 
@@ -101,6 +102,7 @@ ul {
     padding: 0.5em;
     list-style-type: none;
 	text-align: left;
+	min-height: 48px;
   }
 
 .nav-item:hover, .nav-item:focus {
@@ -109,7 +111,7 @@ ul {
   }
 
 #map {
-	min-height: 100%;
+	min-height: 92%;
 	min-width: 100%;
 	background-color: #ccc;
 	position: absolute;
