@@ -40,8 +40,10 @@ gulp.task('content', function() {
 	return gulp.src(paths.content)
     	.pipe(inline({
     	base: paths.content,
+    	js: uglify,
     	css: minifyCSS,
     	disabledTypes: ['svg', 'img'],
+    	ignore: ['js/libs/knockout-3.4.0.js','js/libs/jquery-1.12.1.min.js','https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs&libraries=geometry&amp']
         }))
         .pipe(minifyHTML({ empty: true }))
 		.pipe(gulp.dest('dist/'));
