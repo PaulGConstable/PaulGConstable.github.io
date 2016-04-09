@@ -71,6 +71,9 @@ var viewModel = function(data){
 	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();
 
+    // Variables for marker data
+	var pin, route;
+
     //iterate over observable array
    	this.locationList().forEach(function(cycleLocation){
    		pin = new google.maps.Marker({
@@ -105,14 +108,21 @@ var viewModel = function(data){
 		    }
     	});
 
-    	// Variable for marker data
-		var pin, route;
-
    		// Set variable outside function to equal each marker
 		cycleLocation.marker = pin;
 
+		// Make marker animate
+		function toggleBounce() {
+			if (cycleLocation.marker.getAnimation() !== null) {
+				cycleLocation.marker.setAnimation(null);
+			} else {
+				cycleLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
+			}
+		};
+
 		// Add the content to infoWindow and open it
 		cycleLocation.marker.addListener('click', function() {
+			toggleBounce();
 			infoWindow.setContent('<div class="info-content">' + '<h1>' + 
 				cycleLocation.name() + '</h1>' + 
 				'<div class="body-content"><p>Cycle distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' + 
@@ -125,6 +135,7 @@ var viewModel = function(data){
 			// Remove the current polyline from the Map when you close an infoWindow
 			google.maps.event.addListener(infoWindow,'closeclick',function(){
    				route.setMap(null); //removes polyline
+   				cycleLocation.marker.setAnimation(null); //removes animation
 			});
 
 			// Zoom in and set clicked marker to centre
@@ -147,9 +158,9 @@ var viewModel = function(data){
 
    	});
 
+	// Display ride for the given map marker when clicked in Nav
 	this.displayRide = function(cycleLocation){
 		google.maps.event.trigger(cycleLocation.marker, 'click', {
-  		
         });
 	};
 
