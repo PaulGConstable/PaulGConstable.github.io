@@ -41,9 +41,6 @@ var markers = function(data){
     this.marker = ko.observable();
 };
 
-    // Variable for marker data
-    var pin, route;
-
 var viewModel = function(data){
 	var self = this;
 
@@ -65,15 +62,14 @@ var viewModel = function(data){
 	}
 	});
 
-	 // Gets data from markers function and puts in
-	 // KO observable array above
+	// Gets data from markers function and puts in
+	// KO observable array below
 	favLocations.forEach(function(cycleLocation){
 		self.locationList.push(new markers(cycleLocation));
 	});
 
 	//Info window for markers
     var infoWindow = new google.maps.InfoWindow();
-
 
     //iterate over observable array
    	this.locationList().forEach(function(cycleLocation){
@@ -108,6 +104,9 @@ var viewModel = function(data){
 		    	console.log('Strava data could not be loaded');
 		    }
     	});
+
+    	// Variable for marker data
+		var pin, route;
 
    		// Set variable outside function to equal each marker
 		cycleLocation.marker = pin;
@@ -148,21 +147,28 @@ var viewModel = function(data){
 
    	});
 
-   	//Display the ride for the given map marker on click
-    this.displayRide = function(cycleLocation){
-    	var activeRoute = false;
-    	var routeName = document.getElementById("routeName")
-    	var close = document.getElementById("drawer");
-        close.classList.remove("open");
-
-        google.maps.event.trigger(cycleLocation.marker, 'click', {
+	this.displayRide = function(cycleLocation){
+		google.maps.event.trigger(cycleLocation.marker, 'click', {
   		
         });
-    };
+	};
 
     // Mobile Responsive navigiation to open drawer
-    this.mobileNavToggle = function () {
-    	// Do Navigation in Knockout
+    this.mobileNavToggle = function (cycleLocation) {
+		var menu = document.querySelector('#menu');
+		var main = document.querySelector('content');
+		var drawer = document.querySelector('.rides-container');
+		var close = document.getElementById('drawer');
+
+		menu.addEventListener('click', function(e) {
+			drawer.classList.toggle('open');
+		});
+		main.addEventListener('click', function() {
+			drawer.classList.remove('open');
+		});
+
+        close.classList.remove("open");
+        
     };
 };
 
@@ -172,18 +178,5 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 6
 });
 
-// Mobile responsive navigation
-    var menu = document.querySelector('#menu');
-    var main = document.querySelector('section');
-    var drawer = document.querySelector('.rides-container');
-
-    menu.addEventListener('click', function(e) {
-		drawer.classList.toggle('open');
-		e.stopPropagation();
-		route.setMap(null);
-    });
-    main.addEventListener('click', function() {
-		drawer.classList.remove('open');
-    });
 
 ko.applyBindings(new viewModel());
