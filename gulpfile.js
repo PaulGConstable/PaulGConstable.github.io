@@ -40,9 +40,8 @@ gulp.task('content', function() {
 	return gulp.src(paths.content)
     	.pipe(inline({
     	base: paths.content,
-    	js: uglify,
     	css: minifyCSS,
-    	disabledTypes: ['svg', 'img']
+    	disabledTypes: ['svg', 'img'],
         }))
         .pipe(minifyHTML({ empty: true }))
 		.pipe(gulp.dest('dist/'));
