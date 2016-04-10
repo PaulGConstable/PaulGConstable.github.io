@@ -50,9 +50,8 @@
 <li><a href="https://strava.github.io/api/" target="_blank">Strava API</a></li>
 <li><a href="https://developers.google.com/maps/" target="_blank">Google Maps API</a></li>
 <li><a href="http://pdwhomeautomation.blogspot.co.uk/2016/03/strava-api-lap-analysis-using-raspberry.html" target="_blank">Paul's Geek Dad Blog - using Strava API as JSON</a></li>
-<li><a href="https://hendrikbulens.wordpress.com/2015/08/03/c-and-the-strava-web-api/" target="_blank"></a>Blog on using Strava data</li>
+<li><a href="https://hendrikbulens.wordpress.com/2015/08/03/c-and-the-strava-web-api/" target="_blank">Blog on using Strava data</a></li>
 <li><a href="http://stackoverflow.com/questions/19730040/strava-v3-api-js-get-data" target="_blank">Stack Overflow on using Strava Data</a></li>
 <li><a href="http://knockoutjs.com/index.html" target="_blank">Knockout Documentation</a></li>
-<li></li>
 </ul>
 
