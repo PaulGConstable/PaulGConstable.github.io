@@ -15,7 +15,7 @@
 <li>Channel 4, London;</li>
 <li>Olympic Park, London;</li>
 <li>Amsterdam, Netherlands;</li>
-<li>Dieppe, France;</li>
+<li>Dieppe, France.</li>
 </ol>
 
 <p><i><b>Note:</b> The above rides are the start point locations of my favourite rides</i></p>
@@ -35,7 +35,7 @@
 <li>The map;</li>
 <li>Markers;</li>
 <li>Info Windows;</li>
-<li>Polyline to map the ride</li>
+<li>Polyline to map the ride.</li>
 </ol>
 
 <p>The AJAX call to Strava's API retrieves my data for each of my favourite ride and then displays it on the map using the info window, polyline and marker functionality from Google's API.</p>
