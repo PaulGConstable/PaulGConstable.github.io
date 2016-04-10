@@ -38,7 +38,7 @@
 <li>Polyline to map the ride</li>
 </ol>
 
-<p>The AJAX call to Strava's retrives my data from my favourite ride and then displays it on the map using the info window, polylines and markers.</p>
+<p>The AJAX call to Strava's API retrieves my data for each of my favourite ride and then displays it on the map using the info window, polyline and marker functionality from Google's API.</p>
 
 <h3>Search Functionality</h3>
 
