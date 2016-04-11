@@ -38,19 +38,18 @@
 		</nav>
 		<div id="map"></div>
 	</content>
-
-	<!-- How do I use the async defer method on Google Map's API without it hindering my search filtering and list of markers functions? Please see my app.js, line: 45 where I initialize the map. Any suggestions would be helpful. 
 	
-	Note: As soon as I initialize the map outside and after the viewModel function it appears, but as soon as I initialize the map inside the viewModel, it doesn't work.
-
-	 https://developers.google.com/maps/documentation/javascript/examples/marker-animations -->
-
+	<script> 
+	function onLoad() {
+      app();
+    } 
+    </script>
 	<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs&libraries=geometry&amp&callback=viewModel" async defer>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs&libraries=geometry&amp&callback=onLoad" async defer>
 	</script>
-	<script src="js/libs/knockout-3.4.0.js" async defer></script>
-	<script src="js/libs/jquery-1.12.1.min.js" async defer></script>
-	<script src="js/app.js" async defer></script>
+	<script src="js/knockout-3.4.0.min.js" async defer></script>
+	<script src="js/jquery-1.12.1.min.min.js" async defer></script>
+	<script src="js/app.min.js" async defer></script>
 </body>
 
 </html>
