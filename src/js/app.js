@@ -42,12 +42,12 @@ var markers = function(data){
 };
 
 var viewModel = function(data){
-	// Initialize the Map
+		// Initialize the Map
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: new google.maps.LatLng(51.450210, 2.180518),
 		zoom: 6
 	});
-
+	
 	var self = this;
 
 	this.locationList = ko.observableArray([]);
