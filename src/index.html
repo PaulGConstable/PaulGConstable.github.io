@@ -1,55 +1,58 @@
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content=" Neighbourhood Map Project ">
-	<meta name="author" content=" Paul Constable ">
-	<title>Paul Constable's Neighbourhood Map Project</title>
-	<link href="css/style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=" Neighbourhood Map Project ">
+    <meta name="author" content=" Paul Constable ">
+    <title>Paul Constable's Neighbourhood Map Project</title>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-	<header>
-		<div class="header-flex-item name"><p>Paul Constable</p></div>
-		<div class="header-flex-item">
-			<form><input id="search" placeholder="Search my rides..." data-bind="textInput: cycleSearch"></form>
-		</div>
-		<div class="header-flex-item">
-			<a href="/"><picture>
-			<source media="(max-width: 480px)" srcset="img/profilepic.jpg">
-			<img src="img/profilepic.jpg" alt="profile picture of Paul Constable">
-			</picture></a>
-		</div>
-	</header>
+    <header>
+        <div class="header-flex-item name"><p>Paul Constable</p></div>
+        <div class="header-flex-item">
+            <form><input id="search" class="search" placeholder="Search my rides..." data-bind="textInput: cycleSearch"></form>
+        </div>
+        <div class="header-flex-item">
+            <picture>
+                <source media="(max-width: 480px)" srcset="img/profilepic.jpg">
+                    <img src="img/profilepic.jpg" alt="profile picture of Paul Constable">
+            </picture>
+        </div>
+    </header>
 
-	<section>
-		<a id="menu" class="menu-btn" data-bind="click: mobileNavToggle">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
-			</svg>
-		</a>
-	</section>
+        <section>
+            <a id="menu" class="menu-btn" data-bind="click: mobileNavToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+                </svg>
+            </a>
+        </section>
 
-	<content>
-		<nav id="drawer" class="rides-container" data-bind="click: mobileNavToggle">
-			<ul data-bind="foreach: cycleFiltered">
-				<li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
-			</ul>
-		</nav>
-		<div id="map"></div>
-	</content>
-	
-	<script> 
-	function onLoad() {
-      app();
-    } 
-    </script>
-	<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs&libraries=geometry&amp&callback=onLoad" async defer>
-	</script>
-	<script src="js/knockout-3.4.0.min.js" async defer></script>
-	<script src="js/jquery-1.12.1.min.min.js" async defer></script>
-	<script src="js/app.min.js" async defer></script>
-</body>
-
+        <content>
+            <nav id="drawer" class="rides-container" data-bind="click: mobileNavToggle">
+                <ul data-bind="foreach: cycleFiltered">
+                    <li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
+                </ul>
+            </nav>
+            <div id="map" class="map"></div>
+        </content>
+        <script src="js/knockout-3.4.0.min.js" async></script>
+        <script src="js/app.min.js" async></script>
+        <script src="js/jquery-1.12.1.min.min.js" async></script>
+        <script>
+        function onLoad() {
+            app();
+        }
+        </script>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM4HyJsHOv2ZZZSX8PLv9CPhcaVIQKTs&libraries=geometry&amp&callback=onLoad" onerror="googleError()" async defer>
+        </script>
+        <script>
+        function googleError() {
+            alert('Sorry, Google Maps could not be loaded. Please refresh the page.');
+        }
+        </script>
+    </body>
 </html>
