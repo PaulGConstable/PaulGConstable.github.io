@@ -132,6 +132,7 @@ function toggleBounce() {
 // Add the content to infoWindow and open it
 cycleLocation.marker.addListener('click', function() {
     toggleBounce();
+    setTimeout(toggleBounce, 2000);
     infoWindow.setContent('<div class="info-content">' + '<h2>' +
         cycleLocation.name() + '</h2>' +
         '<div class="body-content"><p>Cycle distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' +
