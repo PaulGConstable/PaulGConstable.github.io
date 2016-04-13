@@ -40,7 +40,7 @@ header p {
     line-height: 0.5em;
 }
 
-.profile-pic {
+header img {
 	-webkit-border-radius: 100%;
 	-moz-border-radius: 100%;
     border-radius: 100%;
@@ -60,7 +60,6 @@ ul {
     text-transform: uppercase;
     padding: 0.5em;
     padding-top:1em;
-    justify-content: flex-end;
 }
 
 .search {
