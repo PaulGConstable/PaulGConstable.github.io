@@ -41,8 +41,10 @@ header p {
 }
 
 header img {
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
     border-radius: 50%;
-    border: 2px solid #fff;
+    box-shadow: 0px 0px 0px 2px #fff;
     max-width: 45px;
     max-height: 45px;
     margin: 0 0 0 0.3em;
