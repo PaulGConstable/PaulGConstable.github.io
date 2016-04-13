@@ -207,7 +207,7 @@ function initMap() {
 function initApp() {
     initMap();
     ViewModel = new viewModel();
-    ko.applyBindings(viewModel);
+    ko.applyBindings(ViewModel);
 }
 
 initApp();
