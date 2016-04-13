@@ -41,7 +41,7 @@ header p {
 }
 
 header img {
-    border-radius: 100%;
+    border-radius: 50%;
     border: 2px solid #fff;
     max-width: 45px;
     max-height: 45px;
