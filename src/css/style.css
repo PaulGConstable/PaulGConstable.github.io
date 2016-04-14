@@ -175,7 +175,7 @@ ul {
         transform: translate(-118%,0);
         /* Here I can animate the drawer*/
         transition: transform 0.3s ease;
-        top: 23%;
+        top: 18%;
     }
 
     .rides-container.open {
