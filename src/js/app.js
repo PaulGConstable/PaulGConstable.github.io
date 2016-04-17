@@ -53,6 +53,7 @@ function app() {
    // i.e., only those matching the "cycleSearch" condition
    var search = self.cycleSearch().toLowerCase();
    var add = document.getElementById("drawer");
+
    if (!search) {
     return self.locationList();
    } else {
@@ -75,22 +76,21 @@ function app() {
   // Variables for marker data
   var pin, route;
 
+  // Set timer for JSONP data retrieval from Strava
+  var stravaRequestTimeout = setTimeout(function(){
+   alert('Error: Sorry, Strava data could not be loaded. Please refresh the page.');
+  }, 3000);
+
   //iterate over observable array
   this.locationList().forEach(function(cycleLocation){
    pin = new google.maps.Marker({
     position: new google.maps.LatLng(cycleLocation.lat(), cycleLocation.lng()),
     map: map,
-    title: cycleLocation.name(),
     animation: google.maps.Animation.DROP
    });
 
    // Get Strava API Data
    var stravaURL = 'https://www.strava.com/api/v3/activities/'+cycleLocation.stravaID()+'?per_page=200&access_token=01d55b235d8b40e4733bc5b843c2d61c5e13911a';
-
-   // Set timer for JSONP data retrieval from Strava
-   var stravaRequestTimeout = setTimeout(function(){
-    alert('Error: Sorry, Strava data could not be loaded. Please refresh the page.');
-   }, 5000);
 
    // Retrieve data with JSON
    $.ajax({
@@ -111,7 +111,7 @@ function app() {
 
      clearTimeout(stravaRequestTimeout);
     },
-    error: function (){
+    error: function ( response ){
      alert('Sorry, Strava data could not be loaded. Please refresh the page.');
     }
    });
@@ -121,17 +121,15 @@ function app() {
 
    // Make marker animate
    function toggleBounce() {
-    if (cycleLocation.marker.getAnimation() !== null) {
+    cycleLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
      cycleLocation.marker.setAnimation(null);
-    } else {
-     cycleLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
+    }, 1400);
    }
 
    // Add the content to infoWindow and open it
    cycleLocation.marker.addListener('click', function() {
     toggleBounce();
-    setTimeout(toggleBounce, 2000);
     infoWindow.setContent('<div class="info-content">' + '<h2>' +
      cycleLocation.name() + '</h2>' +
      '<div class="body-content"><p>Cycle distance: ' + cycleLocation.distance.toFixed(2) + ' miles</p>' +
@@ -149,7 +147,7 @@ function app() {
 
     // Zoom in and set clicked marker to centre
     map.setZoom(8);
-    map.setCenter(cycleLocation.marker.getPosition());
+    map.panTo(cycleLocation.marker.getPosition());
 
     // Decode Strava Route and show it on click of marker
     var decodedRoute = google.maps.geometry.encoding.decodePath(cycleLocation.routeMap);
