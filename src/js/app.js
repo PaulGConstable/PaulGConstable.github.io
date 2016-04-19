@@ -45,27 +45,16 @@ function app() {
  var viewModel = function(data){
   var self = this;
 
+  // this will hold all the data of all the rides, including data from the Strava API
   this.locationList = ko.observableArray([]);
+  // this will hold the user input for search and filtering
   this.cycleSearch = ko.observable('');
+  // this array will contain what it implies: only the markers
+  // that are visible based on the user input
+  this.visibleRides = ko.observableArray();
 
-  self.cycleFiltered = ko.pureComputed(function(){
-   // Represents a filtered list of Location List names
-   // i.e., only those matching the "cycleSearch" condition
-   var search = self.cycleSearch().toLowerCase();
-   var add = document.getElementById("drawer");
 
-   if (!search) {
-    return self.locationList();
-   } else {
-    add.classList.add("open");
-    return ko.utils.arrayFilter(self.locationList(), function(cycleLocation){
-     return cycleLocation.name().toLowerCase().indexOf(search) > -1;
-    });
-   }
-  });
-
-  // Gets data from markers function and puts in
-  // KO observable array below
+  // Build Markers via the Maps API and place them on the map.
   favLocations.forEach(function(cycleLocation){
    self.locationList.push(new markers(cycleLocation));
   });
@@ -81,8 +70,8 @@ function app() {
    alert('Error: Sorry, Strava data could not be loaded. Please refresh the page.');
   }, 3000);
 
-  //iterate over observable array
-  this.locationList().forEach(function(cycleLocation){
+  // Build Markers via the Maps API and place them on the map.
+  self.locationList().forEach(function(cycleLocation){
    pin = new google.maps.Marker({
     position: new google.maps.LatLng(cycleLocation.lat(), cycleLocation.lng()),
     map: map,
@@ -163,14 +152,43 @@ function app() {
    });
   });
 
-  // Display ride for the given map marker when clicked in Nav
-  this.displayRide = function(cycleLocation){
-   google.maps.event.trigger(cycleLocation.marker, 'click', {
+  self.locationList().forEach(function(cycleLocation){
+    self.visibleRides.push(cycleLocation);
+  });
+
+  // This filter will look at the names of the markers, look at
+  // the User cycleSearch input and if the users string can be
+  // found in one of the markers place names then the marker
+  // will remain on the map
+  self.cycleFiltered = function() {
+    var search = self.cycleSearch().toLowerCase();
+    var add = document.getElementById("drawer");
+
+    self.visibleRides.removeAll();
+
+    // This looks at the names of each ride and determines if
+    // the user input can be found within the place name
+    self.locationList().forEach(function(cycleLocation){
+      cycleLocation.marker.setVisible(false);
+      add.classList.add("open");
+      if (cycleLocation.name().toLowerCase().indexOf(search) !== -1){
+        self.visibleRides.push(cycleLocation);
+      }
+    });
+
+    self.visibleRides().forEach(function(cycleLocation){
+      cycleLocation.marker.setVisible(true);
+    });
+  };
+
+  // Invokes the marker function that has been clicked on in the navigation
+  self.displayRide = function(cycleLocation){
+   return google.maps.event.trigger(cycleLocation.marker, 'click', {
    });
   };
 
   // Mobile Responsive navigiation to open drawer
-  this.mobileNavToggle = function (cycleLocation) {
+  self.mobileNavToggle = function (cycleLocation) {
    var menu = document.querySelector('#menu');
    var main = document.querySelector('content');
    var drawer = document.querySelector('.rides-container');

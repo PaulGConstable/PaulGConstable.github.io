@@ -13,7 +13,7 @@
    <div class="header-flex-item name"><p>Paul Constable</p></div>
    <div class="header-flex-item">
     <form>
-      <input id="search" class="search" placeholder="Search my rides..." data-bind="textInput: cycleSearch">
+      <input id="search" class="search" placeholder="Search my rides..." data-bind="textInput: cycleSearch, event: {keyup: cycleFiltered}">
     </form>
    </div>
    <div class="header-flex-item">
@@ -31,7 +31,7 @@
 
  <content>
   <nav id="drawer" class="rides-container" data-bind="click: mobileNavToggle">
-  <ul data-bind="foreach: cycleFiltered">
+  <ul data-bind="foreach: visibleRides">
    <li data-bind="text: name, click: $parent.displayRide" class="nav-item"></li>
   </ul>
   </nav>
